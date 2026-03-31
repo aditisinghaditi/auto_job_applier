@@ -1,15 +1,15 @@
 '''
-Author:     Sai Vignesh Golla
-LinkedIn:   https://www.linkedin.com/in/saivigneshgolla/
+Author:     Aditi
+LinkedIn:   https://www.linkedin.com/in/aditisingh0101/
 
-Copyright (C) 2024 Sai Vignesh Golla
+Copyright (C) 2026 Aditi
 
 License:    GNU Affero General Public License
-            https://www.gnu.org/licenses/agpl-3.0.en.html
             
-GitHub:     https://github.com/GodsScion/Auto_job_applier_linkedIn
+            
+GitHub:     https://github.com/aditisinghaditi/Auto_job_applier_linkedIn
 
-Support me: https://github.com/sponsors/GodsScion
+Support me: https://github.com/sponsors/aditisinghaditi
 
 '''
 
@@ -106,24 +106,24 @@ fair_chance_employer = False       # True or False, Note: True or False are case
 # >>>>>>>>>>> Easy Apply Questions & Inputs <<<<<<<<<<<
 
 # Phone number (required), make sure it's valid.
-phone_number = "9876543210"        # Enter your 10 digit number in quotes Eg: "9876543210"
+phone_number = ""        # Enter your 10 digit number in quotes Eg: "9876543210"
 
 # Give an relative or absolute path of your default resume to be uploaded. If file in not found, will continue using your previously uploaded resume in LinkedIn.
 default_resume_path = "all resumes/default/resume.pdf"      # (In Development)
 
 # What do you want to answer for questions that ask about years of experience you have, this is different from current_experience? 
-years_of_experience = "5"          # A number in quotes Eg: "0","1","2","3","4", etc.
+years_of_experience = "7"          # A number in quotes Eg: "0","1","2","3","4", etc.
 
 # Do you need visa sponsorship now or in future?
 require_visa = "No"               # "Yes" or "No"
 
 # What is the status of your citizenship? # If left empty as "", tool will not answer the question. However, note that some companies make it compulsory to be answered
 # Valid options are: "U.S. Citizen/Permanent Resident", "Non-citizen allowed to work for any employer", "Non-citizen allowed to work for current employer", "Non-citizen seeking work authorization", "Canadian Citizen/Permanent Resident" or "Other"
-us_citizenship = "U.S. Citizen/Permanent Resident"
+us_citizenship = "Indian Citizen"
 
 
 # What is the link to your portfolio website, leave it empty as "", if you want to leave this question unanswered
-website = "https://github.com/GodsScion"                       # "www.example.bio" or "" and so on....
+website = "https://github.com/aditisinghaditi"                       # "www.example.bio" or "" and so on....
 
 # What to enter in your desired salary question, only enter in numbers inside quotes as some companies only allow numbers
 desired_salary = "120000"          # "80000", "90000", "100000" or "120000" and so on....
@@ -140,12 +140,12 @@ state = "STATE"
 zipcode = "12345"
 country = "Will Let You Know When Established"
 
-first_name = "Sai"                 # Your first name in quotes Eg: "First", "Sai"
-middle_name = "Vignesh"            # Your name in quotes Eg: "Middle", "Vignesh", ""
-last_name = "Golla"                # Your last name in quotes Eg: "Last", "Golla"
+first_name = "Aditi"                 # Your first name in quotes Eg: "First", "Sai"
+middle_name = ""            # Your name in quotes Eg: "Middle", "Vignesh", ""
+last_name = "Singh"                # Your last name in quotes Eg: "Last", "Golla"
 
 # Your LinkedIn headline in quotes Eg: "Software Engineer @ Google, Masters in Computer Science", "Recent Grad Student @ MIT, Computer Science"
-headline = "Headline"
+headline = "Software Engineer , AI/ML Engineer @ Ericsson"
 
 # Your summary in quotes, use \n to add line breaks
 summary = "Summary"
@@ -282,6 +282,6 @@ As an independent developer, I pour my heart and soul into creating tools like t
 Your support, whether through donations big or small or simply spreading the word, means the world to me and helps keep this project alive and thriving.
 
 Gratefully yours 🙏🏻,
-Sai Vignesh Golla
+Aditi
 '''
 ############################################################################################################

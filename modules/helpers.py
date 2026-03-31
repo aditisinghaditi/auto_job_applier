@@ -1,19 +1,21 @@
 '''
-Author:     Sai Vignesh Golla
-LinkedIn:   https://www.linkedin.com/in/saivigneshgolla/
+Author:     Aditi
+LinkedIn:   https://www.linkedin.com/in/aditisinghaditi/
 
-Copyright (C) 2024 Sai Vignesh Golla
+Copyright (C) 2026 Aditi
 
 License:    GNU Affero General Public License
-            https://www.gnu.org/licenses/agpl-3.0.en.html
             
-GitHub:     https://github.com/GodsScion/Auto_job_applier_linkedIn
+            
+GitHub:     https://github.com/aditisinghaditi/auto_job_applier
 
-Support me: https://github.com/sponsors/GodsScion
+Support me: https://github.com/sponsors/aditisinghaditi
 
 version:    26.01.20.5.08
 '''
 
+
+from __future__ import annotations
 
 # Imports
 

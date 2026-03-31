@@ -1,18 +1,20 @@
 '''
-Author:     Sai Vignesh Golla
-LinkedIn:   https://www.linkedin.com/in/saivigneshgolla/
+Author:     Aditi
+LinkedIn:   https://www.linkedin.com/in/aditisinghaditi/
 
-Copyright (C) 2024 Sai Vignesh Golla
+Copyright (C) 2026 Aditi
 
 License:    GNU Affero General Public License
-            https://www.gnu.org/licenses/agpl-3.0.en.html
+           
             
-GitHub:     https://github.com/GodsScion/Auto_job_applier_linkedIn
+GitHub:     https://github.com/aditisinghaditi/auto_job_applier
 
-Support me: https://github.com/sponsors/GodsScion
+Support me: https://github.com/sponsors/aditisinghaditi
 
 version:    26.01.20.5.08
 '''
+
+from __future__ import annotations
 
 from config.settings import click_gap, smooth_scroll
 from modules.helpers import buffer, print_lg, sleep
@@ -36,10 +38,16 @@ def wait_span_click(driver: WebDriver, text: str, time: float=5.0, click: bool=T
     '''
     if text:
         try:
-            button = WebDriverWait(driver,time).until(EC.presence_of_element_located((By.XPATH, './/span[normalize-space(.)="'+text+'"]')))
+            # Try to find span, label or button with the text
+            xpath = f'.//*[self::span or self::label or self::button][normalize-space(.)="{text}"]'
+            button = WebDriverWait(driver,time).until(EC.presence_of_element_located((By.XPATH, xpath)))
             if scroll:  scroll_to_view(driver, button, scrollTop)
             if click:
-                button.click()
+                # Use JS click if standard click fails
+                try:
+                    button.click()
+                except:
+                    driver.execute_script("arguments[0].click();", button)
                 buffer(click_gap)
             return button
         except Exception as e:
@@ -87,10 +95,22 @@ def boolean_button_click(driver: WebDriver, actions: ActionChains, text: str) ->
     Tries to click on the boolean button with the given `text` text.
     '''
     try:
-        list_container = driver.find_element(By.XPATH, './/h3[normalize-space()="'+text+'"]/ancestor::fieldset')
-        button = list_container.find_element(By.XPATH, './/input[@role="switch"]')
+        # Try finding the section header and then the switch/checkbox
+        # LinkedIn uses h3 for filter names in 'All filters'
+        try:
+            list_container = driver.find_element(By.XPATH, f'.//h3[normalize-space()="{text}"]/ancestor::fieldset')
+            button = list_container.find_element(By.XPATH, './/input[@role="switch" or @type="checkbox"]')
+        except:
+            # Fallback to finding any element with the text and then looking for a switch/checkbox nearby
+            label_ele = driver.find_element(By.XPATH, f'.//*[self::span or self::label or self::h3][normalize-space(.)="{text}"]')
+            button = label_ele.find_element(By.XPATH, './ancestor::div[1]//input[@role="switch" or @type="checkbox"]')
+            
         scroll_to_view(driver, button)
-        actions.move_to_element(button).click().perform()
+        # Try standard click first, then actions
+        try:
+            button.click()
+        except:
+            actions.move_to_element(button).click().perform()
         buffer(click_gap)
     except Exception as e:
         print_lg("Click Failed! Didn't find '"+text+"'")

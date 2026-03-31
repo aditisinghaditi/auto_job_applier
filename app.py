@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 import csv
@@ -93,6 +95,7 @@ def update_applied_date(job_id):
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5001))
+    app.run(debug=True, port=port)
 
 ##<

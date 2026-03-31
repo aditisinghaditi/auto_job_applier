@@ -1,19 +1,21 @@
 '''
-Author:     Sai Vignesh Golla
-LinkedIn:   https://www.linkedin.com/in/saivigneshgolla/
+Author:     Aditi
+LinkedIn:   https://www.linkedin.com/in/aditisinghaditi/
 
-Copyright (C) 2024 Sai Vignesh Golla
+Copyright (C) 2026 Aditi
 
 License:    GNU Affero General Public License
-            https://www.gnu.org/licenses/agpl-3.0.en.html
             
-GitHub:     https://github.com/GodsScion/Auto_job_applier_linkedIn
+            
+GitHub:     https://github.com/aditisinghaditi/auto_job_applier
 
-Support me: https://github.com/sponsors/GodsScion
+Support me: https://github.com/sponsors/aditisinghaditi
 
 version:    26.01.20.5.08
 '''
 
+
+from __future__ import annotations
 
 # Imports
 import os
@@ -227,8 +229,6 @@ def apply_filters() -> None:
         multi_sel_noWait(driver, on_site)
         if job_type or on_site: buffer(recommended_wait)
 
-        if easy_apply_only: boolean_button_click(driver, actions, "Easy Apply")
-        
         multi_sel_noWait(driver, location)
         multi_sel_noWait(driver, industry)
         if location or industry: buffer(recommended_wait)
@@ -257,8 +257,27 @@ def apply_filters() -> None:
 
     except Exception as e:
         print_lg("Setting the preferences failed!")
-        pyautogui.confirm(f"Faced error while applying filters. Please make sure correct filters are selected, click on show results and click on any button of this dialog, I know it sucks. Can't turn off Pause after search when error occurs! ERROR: {e}", ["Doesn't look good, but Continue XD", "Look's good, Continue"])
         # print_lg(e)
+
+    # Click "Easy Apply" filter pill button in the top filter bar (it's outside the "All filters" modal)
+    if easy_apply_only:
+        try:
+            buffer(1)
+            easy_apply_btn = WebDriverWait(driver, 5).until(
+                EC.element_to_be_clickable((By.XPATH, '//button[normalize-space()="Easy Apply" and contains(@class, "search-reusables")]'))
+            )
+            easy_apply_btn.click()
+            buffer(click_gap)
+            print_lg("Clicked 'Easy Apply' filter button")
+        except:
+            # Fallback: try clicking any button with "Easy Apply" text in the top bar
+            try:
+                easy_apply_btn = driver.find_element(By.XPATH, '//button[normalize-space()="Easy Apply"]')
+                easy_apply_btn.click()
+                buffer(click_gap)
+                print_lg("Clicked 'Easy Apply' filter button (fallback)")
+            except Exception as e2:
+                print_lg("Click Failed! Didn't find 'Easy Apply' filter button in top bar")
 
 
 
@@ -1215,10 +1234,10 @@ def main() -> None:
         print_lg("Irrelevant jobs skipped:        {}\n".format(skip_count))
         if randomly_answered_questions: print_lg("\n\nQuestions randomly answered:\n  {}  \n\n".format(";\n".join(str(question) for question in randomly_answered_questions)))
         quotes = choice([
-            "Never quit. You're one step closer than before. - Sai Vignesh Golla", 
-            "All the best with your future interviews, you've got this. - Sai Vignesh Golla", 
-            "Keep up with the progress. You got this. - Sai Vignesh Golla", 
-            "If you're tired, learn to take rest but never give up. - Sai Vignesh Golla",
+            "Never quit. You're one step closer than before. - Aditi", 
+            "All the best with your future interviews, you've got this. - Aditi", 
+            "Keep up with the progress. You got this. - Aditi", 
+            "If you're tired, learn to take rest but never give up. - Aditi",
             "Success is not final, failure is not fatal, It is the courage to continue that counts. - Winston Churchill (Not a sponsor)",
             "Believe in yourself and all that you are. Know that there is something inside you that is greater than any obstacle. - Christian D. Larson (Not a sponsor)",
             "Every job is a self-portrait of the person who does it. Autograph your work with excellence. - Jessica Guidobono (Not a sponsor)",
@@ -1234,7 +1253,7 @@ def main() -> None:
         if timeSaved > 0:
             timeSaved += 60
             timeSavedMsg = f"In this run, you saved approx {round(timeSaved/60)} mins ({timeSaved} secs), please consider supporting the project."
-        msg = f"{quotes}\n\n\n{timeSavedMsg}\nYou can also get your quote and name shown here, or prioritize your bug reports by supporting the project at:\n\nhttps://github.com/sponsors/GodsScion\n\n\nSummary:\n{summary}\n\n\nBest regards,\nSai Vignesh Golla\nhttps://www.linkedin.com/in/saivigneshgolla/\n\nTop Sponsors:\n{sponsors}"
+        msg = f"{quotes}\n\n\n{timeSavedMsg}\nYou can also get your quote and name shown here, or prioritize your bug reports by supporting the project at:\n\nhttps://github.com/sponsors/GodsScion\n\n\nSummary:\n{summary}\n\n\nBest regards,\nAditi\nhttps://www.linkedin.com/in/saivigneshgolla/\n\nTop Sponsors:\n{sponsors}"
         pyautogui.alert(msg, "Exiting..")
         print_lg(msg,"Closing the browser...")
         if tabs_count >= 10:
